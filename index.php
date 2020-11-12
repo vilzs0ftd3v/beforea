@@ -6,13 +6,16 @@ $databaseusername = "freedbtech_username";
 $databasepassword = "password";
 
 $con = mysqli_connect($databasehost,$databaseusername,$databasepassword,$databasename) or die(mysqli_error($con));
-mysqli_set_charset($con,"utf-8");
+//mysqli_set_charset($con,"utf-8");
+mysqli_query($conn,"SET CHARACTER SET 'utf8'");
+mysqli_query($conn,"SET SESSION collation_connection ='utf8_unicode_ci'");
 $query = file_get_contents("php://input");
 $sth = mysqli_query($con,$query);
 
 if(mysqli_errno($con)){
     header("HTTP/1.1 500 Internal Server Error");
     echo $query."\n";
+    echo "errorr";
     echo mysqli_error($con);
 }else{
     $rows=array();
